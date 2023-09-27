@@ -10,6 +10,7 @@ function CarSingle() {
 
     const [car, setCar] = useState();
 
+
     useEffect(()=> {
 
 
@@ -25,6 +26,17 @@ function CarSingle() {
         console.log(car);
  
      },[car]);
+
+     function addCart(){
+        let cart = localStorage.getItem('cos') ? JSON.parse(localStorage.getItem('cos')) : [];
+        if(!cart){
+            JSON.parse(localStorage.setItem('cos',[]));
+        }
+        cart.push(car.id);
+        localStorage.setItem('cos', JSON.stringify(cart));
+        window.location.reload();
+     }
+
     if(!car){
         return (<>Loading...</>)
     }
@@ -36,9 +48,10 @@ function CarSingle() {
 
             <div id="contentProduct">
                 <div id="productPresentation">
-                    <div id="productPhoto" class="floatLeft">
+                    <div id="productPhoto" className="floatLeft">
                         <img src={'http://localhost:8000/uploads/'+car.imagine}  width="100"/>
                     </div>
+                    
                     <div id="productDescription" className="floatLeft">
                     <h3>{car.producer.nume} {car.car_model.nume} {car.echipare}</h3>
                         <div className="promo">
@@ -55,8 +68,10 @@ function CarSingle() {
                     </div>
                     <div className="clear"></div>    
                     <div id="nextButton">
-                        <a className="actionButton" href={'./order/'+car.id}>Catre Comanda</a>
+                        <input onClick={addCart} type="button" name="add_cart" value="Adauga in Cos"/>
                     </div>
+                    
+                    <a className="actionButton" href={'/masini'}>Inapoi</a>
                 </div>
 
                 <div id="payInfo">

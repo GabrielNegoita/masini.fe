@@ -6,6 +6,7 @@ import Contact from './Contact.jsx'
 import CarSingle from './CarSingle.jsx'
 import Navigation from './Navigation.jsx'
 import Order from './Order.jsx'
+import ShoppingCart from './ShoppingCart.jsx'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="masina/:id" element={<CarSingle />} />
         <Route path="contact" element={<Contact/>}/>
         <Route path="masina/order/:id" element={<Order />} />
+        <Route path="shoppingcart" element={<ShoppingCart />}/>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

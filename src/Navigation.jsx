@@ -2,12 +2,16 @@ import {useEffect} from 'react';
 
 function Navigation(props) {
 
-
+    let cos = JSON.parse(localStorage.getItem('cos')) ? JSON.parse(localStorage.getItem('cos')).length : 0;
 
     useEffect(() => {
        
     },[]);
    
+    function deleteCart(){
+        let prod = localStorage.clear('cos');
+        window.location.reload();
+    }
 
     return (
 
@@ -24,7 +28,9 @@ function Navigation(props) {
                     <a href="">Intrebari Frecvente</a>
                     <a href="">Contact</a>
                     <br/>
-                    <a href="">Cos de cumparaturi</a>
+                    <a href="/shoppingcart">Cos de cumparaturi {cos}</a>
+                    <br/>
+                    <input onClick={deleteCart} type="button" name="sterge_cos" value="Goleste cosul"/>
                 </div>
                 <div className="clear"></div>
             </div>

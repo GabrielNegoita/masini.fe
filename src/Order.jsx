@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 function Order(){
 
-    let {id} = useParams();
+    const {id} = useParams();
     const [counties, setCounties]=useState();
     const [cities, setCities]=useState();
 
@@ -37,14 +37,14 @@ function Order(){
     }
 
     function sendOrder(){
-        axios.post('http://localhost:8000/api/sendContact', 
+        axios.post('http://localhost:8000/api/sendOrder', 
             {
                 nume: n.current.value,
                 prenume: p.current.value,
                 county: j.current.value,
                 city: o.current.value,
                 adresa: adress.current.value,
-                car_id: {id}
+                car_id: id
             }
             ).then((response) => {
             console.log(response);
@@ -53,7 +53,7 @@ function Order(){
         p.current.value='';
         j.current.value='';
         adress.current.value='';
-        window.location.replace("http://localhost:5173/masini");
+        //window.location.replace("http://localhost:5173/masini");
     }
 
 
@@ -66,7 +66,7 @@ function Order(){
     return (
         <div id="order">
             <Navigation/>
-            <form action="" method="POST">
+            <form method="POST">
                 <div id="clientInfo">
                     <label>Nume:</label>
                     <input ref={n} type="text" name="nume" placeholder="Nume"/>
@@ -103,7 +103,7 @@ function Order(){
                 
                 <br/>
                 <br/>
-                <input onClick={sendOrder} type="submit" name="trimite" value="Plasare Comanda"/>
+                <input onClick={sendOrder} type="button" name="trimite" value="Plasare Comanda"/>
             </form>
 
         

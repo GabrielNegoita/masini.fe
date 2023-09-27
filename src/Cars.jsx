@@ -20,7 +20,6 @@ function Cars() {
          //setCars(JSON.parse(response.data));
          setCars(response.data);
        })
-
     },[]);
 
 
