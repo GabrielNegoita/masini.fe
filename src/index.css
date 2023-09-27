@@ -1,0 +1,329 @@
+#contactBody {
+  background-color: rgb(42, 37, 37);
+  display: flex;
+  justify-content: center;
+  
+}
+
+
+.contact {
+  float: left;
+  clear: both;
+  width: 100%;
+  
+}
+
+ label {
+  color: aliceblue;
+  font-size: 30px;
+  margin-right: 15px;
+}
+
+input{
+  background-color: teal;
+  padding: 7px;
+  
+}
+
+textarea {
+  background-color: teal;
+  padding: 30px;
+  
+}
+
+#send {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  
+}
+
+input[type=button] {
+  background-color: darkgray;
+  color: aliceblue;
+  border: none;
+  font-size: 20px;
+  margin-top: 40px;
+  
+}
+
+input[type=button]:hover{
+  background-color: rgb(102, 102, 102);
+  color: rgb(93, 4, 4);
+  cursor: pointer;
+}
+
+
+
+
+#car {
+  width: 70%;
+  margin: 20px;
+}
+
+#car img {
+  
+  width: 300px;
+  height: 300px;
+}
+
+#car h3 {
+  color: aliceblue;
+  
+
+
+}
+
+/*masini*/
+
+.clear{
+  clear:both;
+}
+.floatLeft {
+  float:left;
+}
+
+.actionButton {
+  background-color: #eeff12;
+  text-decoration: none;
+  font-size: 20px;
+  color:#103344;
+  padding: 15px;
+  display: inline-block;
+}
+.actionButton:hover{
+  background-color: #103344;
+  color: #FFF;
+}
+
+body{
+  background-color: #FFF;
+  padding: 0;
+  margin:0;
+}
+
+
+
+#header{
+  background-color: #103344;
+  padding:20px;
+}
+#logoContainer{
+  width:50%;
+}
+#logoContainer img {
+  width:50px;
+}
+#nav{
+  width:50%;
+  text-align: right;
+}
+#nav a{
+  color:#FFF;
+  text-decoration: none;
+}
+#nav a:hover{
+  color:#eeff12;
+}
+#footer {
+  background-color: #103344;
+  padding:50px;
+  text-align: center;
+}
+#footer a{
+  text-decoration: none;
+  color:#FFF;
+  margin-right:10px;
+}
+#footer a:hover{
+  color: #eeff12;
+}
+
+
+/* cars */
+#alegeri{
+  margin: 30px;
+  padding-bottom: 30px;
+}
+
+.alege {
+  width: 25%;
+  background-color: gray;
+  color: beige;
+  text-align: center;
+}
+.activeChoice {
+  background-color: #eeff12;
+  color:#103344;
+}
+.car{
+  width: 25%;
+  text-align: center;
+  margin: 30px;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.car a{
+  background-color: #eeff12;
+  color: #103344;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.car a:hover{
+  background-color: #103344;
+  color: #eeff12;
+}
+
+.car img{
+  width: 100%;
+}
+
+.promo{
+  background-color: #103344;
+  color: #FFF;
+  text-align: center;
+  margin-left: 40px;
+}
+
+
+.description{
+  text-align: center;
+  color: black;
+}
+
+.productCodes{
+  background-color: #FFF;
+  color: gray;
+}
+
+/*car*/
+
+#alegeMasina2 {
+  width: 25%;
+  background-color: #103344;
+  color: #FFF;
+  text-align: center;
+}
+
+#alegeAbonament{
+  width: 25%;
+  background-color: #eeff12;
+  color: black;
+  text-align: center;
+}
+
+#productPresentation{
+  background-color: aliceblue;
+}
+
+#productPhoto{
+  width:50%;
+}
+
+#productPhoto img{
+  width: 100%;
+  margin-left: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #FFF;
+  padding-left: 50px;
+}
+
+#productDescription{
+  width: 40%;
+  text-align: center;
+  margin-left: 60px;
+  margin-top: 30px;
+
+}
+
+#productDescription a{
+  text-decoration: none;
+}
+
+#nextButton{
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+  text-align: right;
+}
+#nextButton a {
+  margin-right:40px;
+}
+#payInfo{
+  width: 100%;
+  background-color: #103344;
+  padding-bottom: 30px;
+}
+.infoBlock {
+  color: #FFF;
+  width: 45%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#facilitatiAbonament{
+  padding-left: 50px;
+}
+#descDotari{
+  padding:30px;
+  text-align: right;
+  width: 60%;
+}
+#descDotari a{
+  color: #FFF;
+  background-color: #103344;
+  text-decoration: none;
+  padding: 10px;
+  width: 50%;
+  
+}
+#descDotari a:hover{
+  color:black;
+  background-color: #103344;
+}
+
+#dateTehnice table{
+  border:1px solid #103344;
+  width:90%;
+}
+#dateTehnice table td{
+  border:1px solid #103344;
+  padding: 10px;
+}
+.darkRow{
+  background-color: #ccc;
+}
+#informatiiSuplimentare p{
+  margin-left: 30px;
+}
+body{
+  width:100%;
+}
+
+#nav a{
+  margin: 5px;
+}
+
+/*order*/
+
+#order {
+  
+}
+
+#order form {
+  background-color: cadetblue;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 10px;
+}
+
+#order input {
+  background-color: #ccc;
+  border: 0;
+}
