@@ -1,11 +1,15 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import addCart from "./CarSingle";
+import takeCart from "./CarSingle";
+import { CartContext } from "./Application";
 
 
 function Product(props){
 
     const [product, setCar] = useState();
-    const {product_id} = props;
+    const {product_id, quantity} = props;
+    const [cart, setCart] = useContext(CartContext);
 
 
     useEffect(()=> {
@@ -16,20 +20,50 @@ function Product(props){
 
     },[]);
 
+    function addQuantity(){
+
+        setCart((current) => {
+
+            let oldCart = [...current];
+            if(oldCart[product.id]){
+                oldCart[product.id] += 1;
+            } 
+            else {
+                oldCart[car.id] = 1;
+            }
+            console.log(oldCart);
+            return oldCart;
+
+
+        });
+    }
+
+    function takeQuantity(){
+        setCart((current) => {
+
+            let oldCart = [...current];
+            if(oldCart[product.id]){
+                oldCart[product.id] -= 1;
+                if(oldCart[product.id]==0){
+                    deleteElement();
+                }
+            } 
+            console.log(oldCart);
+            return oldCart;
+
+
+        });
+
+        
+    }
+
     function deleteElement(){
+        setCart((cart) =>
+            cart.filter(c =>
+            c !== cart[product.id])
+        )
+        console.log(cart);
         
-        let cos = JSON.parse(localStorage.getItem('cos'));
-
-        
-        //let element = cos.find()
-        //cos = localStorage.removeItem('cos', JSON.stringify(product.id));
-
-
-
-        let newCos = cos.filter((a) => a != product.id );
-        localStorage.setItem('cos',JSON.stringify(newCos));
-        window.location.reload();
-
     }
 
     if(!product) {
@@ -52,12 +86,12 @@ function Product(props){
                     <input onClick={deleteElement} type="button" name="delete_prod" value="Sterge din cos"/>
                 </div>
                 <div id="cantProdus" className="floatLeft">
-                    <h3>Cantitate: 
+                    <h3>Cantitate: {quantity}
                         
-                <br/>
-                <a className="actionButton" href="">+</a>
-                <input type="button" name="qty-" value="-"/>
-                </h3>
+                    <br/>
+                    <input onClick={addQuantity} type="button" name="qty-" value="+"/>
+                    <input onClick={takeQuantity} type="button" name="qty-" value="-"/>
+                    </h3>
                 </div>
                 <div className="clear"></div>
             </div>

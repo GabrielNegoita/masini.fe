@@ -33,11 +33,12 @@ function Cars() {
     }
     return (
       <>
-        <Navigation />
+
       {
         cars.map(function(i) {
             return <Car carData = {i} />
         })
+        
       }
       </>
     );

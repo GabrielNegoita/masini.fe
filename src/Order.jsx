@@ -1,21 +1,46 @@
-import {useState,useRef, useEffect} from "react";
+import {useState,useRef, useEffect, useContext} from "react";
 import Navigation from "./Navigation";
 import axios from "axios";
 import CarSingle from "./CarSingle";
-import { useParams } from "react-router-dom";
+import { CartContext } from "./Application";
 
 
 function Order(){
 
-    const {id} = useParams();
+    const [cart, setCart] = useContext(CartContext);
     const [counties, setCounties]=useState();
     const [cities, setCities]=useState();
+    const [cars, setCars] = useState([]);
+
+    const [car, setCar] = useState();
 
     const n = useRef();
     const p = useRef();
     const j = useRef();
     const o = useRef();
     const adress = useRef();
+
+    let sum = 0;
+
+    useEffect(() => {
+        for(let i=0; i<=cart.length; i++){
+
+            if(cart[i]>0){
+
+                axios.get("http://localhost:8000/api/getCar/"+i).then((response) => {
+                    setCars((current)=>
+                        [...current, response.data] 
+                    );
+                })
+            }
+        }
+    },[]);
+
+    useEffect(() => {
+        console.log(cars);
+    },[cars]);
+
+
 
     useEffect(()=> {
         axios.get('http://localhost:8000/api/getCounties').then((response)=>{
@@ -26,6 +51,22 @@ function Order(){
     useEffect(()=> {
         console.log(counties);
     },[counties]);
+
+    function getPrice(id){
+        axios.get("http://localhost:8000/api/getCar/"+id).then((response) => {
+            setCar(response.data)
+        })
+    }
+
+
+
+    function sumElements(){
+        cars.map(function(b, t){
+            console.log(sum);
+            return sum += t.pret*b
+        });
+        return sum
+    }
 
     function showCity(){
         const county_id = j.current.value;
@@ -53,7 +94,9 @@ function Order(){
         p.current.value='';
         j.current.value='';
         adress.current.value='';
-        //window.location.replace("http://localhost:5173/masini");
+
+        setCart([]);
+        window.location.replace("http://localhost:5173/masini");
     }
 
 
@@ -65,7 +108,6 @@ function Order(){
 
     return (
         <div id="order">
-            <Navigation/>
             <form method="POST">
                 <div id="clientInfo">
                     <label>Nume:</label>
@@ -96,7 +138,29 @@ function Order(){
                     <label>Adresa:</label>
                     <input ref={adress} type="text" name="adresa" placeholder="Adresa"/>
                     <br/>
-                    <label>ID Masina:{id}</label>
+
+
+                   
+
+                    
+
+
+                    {
+                    
+                    cart.map(function(q, m){
+                        if(m){
+                            return(
+                                <>
+                                    <label>ID Masina:{m}</label>
+                                    <label>Cantitate:{q}</label>
+                                    <br/>
+                                </>
+                            );
+                        }
+                    })
+                    }
+                    <br/>
+                    <label>Total plata:{sumElements()}</label>
                     
                 </div>
 

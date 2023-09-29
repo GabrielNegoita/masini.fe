@@ -1,8 +1,10 @@
-import {useEffect} from 'react';
+import {useContext, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 function Car(props) {
 
     const {carData} = props;
+
 
 
     useEffect(() => {
@@ -28,7 +30,7 @@ function Car(props) {
                         <h4>COD PRODUS: {carData.id}</h4>
                     </div>
                 </div>
-                <a href={'masina/'+carData.id}>Vezi masina</a>
+                <Link to={'/masina/'+carData.id}> Vezi masina </Link>
             </div>
 
             

@@ -1,8 +1,9 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-import Navigation from './Navigation';
+import { CartContext } from './Application';
 
 function CarSingle() {
 
@@ -10,6 +11,7 @@ function CarSingle() {
 
     const [car, setCar] = useState();
 
+    const [cart, setCart] = useContext(CartContext);
 
     useEffect(()=> {
 
@@ -24,17 +26,40 @@ function CarSingle() {
 
      useEffect(()=> {
         console.log(car);
- 
+        
      },[car]);
 
      function addCart(){
-        let cart = localStorage.getItem('cos') ? JSON.parse(localStorage.getItem('cos')) : [];
-        if(!cart){
-            JSON.parse(localStorage.setItem('cos',[]));
-        }
-        cart.push(car.id);
-        localStorage.setItem('cos', JSON.stringify(cart));
-        window.location.reload();
+
+        setCart((current) => {
+
+            let oldCart = [...current];
+            if(oldCart[car.id]){
+                oldCart[car.id] += 1;
+            } 
+            else {
+                oldCart[car.id] = 1;
+            }
+            console.log(oldCart);
+            return oldCart;
+
+
+        });
+     }
+     
+     function takeCart(){
+
+        setCart((current) => {
+
+            let oldCart = [...current];
+            if(oldCart[car.id]){
+                oldCart[car.id] -= 1;
+            } 
+            console.log(oldCart);
+            return oldCart;
+
+
+        });
      }
 
     if(!car){
@@ -44,7 +69,7 @@ function CarSingle() {
     return (
 
         <>
-           <Navigation/>
+
 
             <div id="contentProduct">
                 <div id="productPresentation">
@@ -68,10 +93,14 @@ function CarSingle() {
                     </div>
                     <div className="clear"></div>    
                     <div id="nextButton">
-                        <input onClick={addCart} type="button" name="add_cart" value="Adauga in Cos"/>
+                        <label>Cantitate: {}</label>
+                        <br/>
+                        <input onClick={addCart} type="button" name="add_cart" value="+"/>
+                        <input onClick={takeCart} type="button" name="add_cart" value="-"/>
                     </div>
-                    
-                    <a className="actionButton" href={'/masini'}>Inapoi</a>
+                    <Link  className="actionButton" to="/shoppingcart">Catre comanda</Link>
+                    <br/>
+                    <Link  className="actionButton" to="/masini">Inapoi</Link>
                 </div>
 
                 <div id="payInfo">
