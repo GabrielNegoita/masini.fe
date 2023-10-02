@@ -12,7 +12,7 @@ function Order(){
     const [cities, setCities]=useState();
     const [cars, setCars] = useState([]);
 
-    const [car, setCar] = useState();
+    //const [car, setCar] = useState();
 
     const n = useRef();
     const p = useRef();
@@ -20,25 +20,55 @@ function Order(){
     const o = useRef();
     const adress = useRef();
 
-    let sum = 0;
+    let cars_id = [];
+    let quantity = [];
+
 
     useEffect(() => {
+        let orderCars = [];
         for(let i=0; i<=cart.length; i++){
 
-            if(cart[i]>0){
+            if(cart[i] > 0){
 
                 axios.get("http://localhost:8000/api/getCar/"+i).then((response) => {
-                    setCars((current)=>
-                        [...current, response.data] 
-                    );
+                    orderCars.push(response.data);
+                    //totalSum += response.data.pret * cart[i];
                 })
+
+                //cars_id.push(cart[i]);
+                //quantity.push(cart[cars[i].id]);
             }
         }
+        setCars(orderCars);
     },[]);
 
-    useEffect(() => {
-        console.log(cars);
-    },[cars]);
+    /*useEffect(() => {
+        
+        if(cars.length > 0){
+            let totalSum = 0;
+            
+            for(let i=0; i<=cars.length; i++ ){
+                if(cars[i]){
+                    totalSum += cars[i].pret * cart[cars[i].id];
+                }
+            }
+            setTotalPayment(totalSum);
+        }
+    },[cars]);*/
+
+
+    function totalPay(){
+        if(cars.length > 0){
+            let totalSum = 0;
+            
+            for(let i=0; i<=cars.length; i++ ){
+                if(cars[i]){
+                    totalSum += cars[i].pret * cart[cars[i].id];
+                }
+            }
+            return totalSum;
+        }
+    }
 
 
 
@@ -49,24 +79,27 @@ function Order(){
     },[]);
 
     useEffect(()=> {
-        console.log(counties);
+        //console.log(counties);
     },[counties]);
 
-    function getPrice(id){
+    /*function getPrice(id){
         axios.get("http://localhost:8000/api/getCar/"+id).then((response) => {
             setCar(response.data)
         })
-    }
+    }*/
 
 
 
-    function sumElements(){
+    /*function sumElements(){
+
+        let result = cars.reduce((sum, car) => sum + car.pret, 0);
+
         cars.map(function(b, t){
             console.log(sum);
             return sum += t.pret*b
         });
-        return sum
-    }
+        return result
+    }*/
 
     function showCity(){
         const county_id = j.current.value;
@@ -85,7 +118,7 @@ function Order(){
                 county: j.current.value,
                 city: o.current.value,
                 adresa: adress.current.value,
-                car_id: id
+                cart: cart
             }
             ).then((response) => {
             console.log(response);
@@ -95,8 +128,8 @@ function Order(){
         j.current.value='';
         adress.current.value='';
 
-        setCart([]);
-        window.location.replace("http://localhost:5173/masini");
+        //setCart([]);
+        //window.location.replace("http://localhost:5173/masini");
     }
 
 
@@ -148,7 +181,7 @@ function Order(){
                     {
                     
                     cart.map(function(q, m){
-                        if(m){
+                        if(q>0){
                             return(
                                 <>
                                     <label>ID Masina:{m}</label>
@@ -160,7 +193,7 @@ function Order(){
                     })
                     }
                     <br/>
-                    <label>Total plata:{sumElements()}</label>
+                    <label>Total plata:{totalPay()}</label>
                     
                 </div>
 

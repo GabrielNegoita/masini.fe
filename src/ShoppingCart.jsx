@@ -34,6 +34,7 @@ function ShoppingCart(){
                 
                 
             }
+            
             <Link className="actionButton" to="/order">Comanda</Link>
         </>
     );

@@ -33,7 +33,7 @@ function Navigation() {
             <div id="header">
                 <div className="floatLeft" id="logoContainer">
                     <a href="">
-                        <img src="porsche/public/img/logo.png"/>
+                        <img src=""/>
                     </a>
                 </div>
                 <div className="floatLeft" id="nav">

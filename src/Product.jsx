@@ -20,6 +20,10 @@ function Product(props){
 
     },[]);
 
+    useEffect(() => {
+        console.log(product);
+    },[product]);
+
     function addQuantity(){
 
         setCart((current) => {
