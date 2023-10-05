@@ -20,6 +20,8 @@ function Order(){
     const o = useRef();
     const adress = useRef();
 
+    let t;
+
     let cars_id = [];
     let quantity = [];
 
@@ -35,26 +37,10 @@ function Order(){
                     //totalSum += response.data.pret * cart[i];
                 })
 
-                //cars_id.push(cart[i]);
-                //quantity.push(cart[cars[i].id]);
             }
         }
         setCars(orderCars);
     },[]);
-
-    /*useEffect(() => {
-        
-        if(cars.length > 0){
-            let totalSum = 0;
-            
-            for(let i=0; i<=cars.length; i++ ){
-                if(cars[i]){
-                    totalSum += cars[i].pret * cart[cars[i].id];
-                }
-            }
-            setTotalPayment(totalSum);
-        }
-    },[cars]);*/
 
 
     function totalPay(){
@@ -64,6 +50,10 @@ function Order(){
             for(let i=0; i<=cars.length; i++ ){
                 if(cars[i]){
                     totalSum += cars[i].pret * cart[cars[i].id];
+                    quantity.push(cart[cars[i].id]);
+                    cars_id.push(cars[i].id);
+                    console.log(cars_id);
+                    console.log(quantity);
                 }
             }
             return totalSum;
@@ -82,24 +72,6 @@ function Order(){
         //console.log(counties);
     },[counties]);
 
-    /*function getPrice(id){
-        axios.get("http://localhost:8000/api/getCar/"+id).then((response) => {
-            setCar(response.data)
-        })
-    }*/
-
-
-
-    /*function sumElements(){
-
-        let result = cars.reduce((sum, car) => sum + car.pret, 0);
-
-        cars.map(function(b, t){
-            console.log(sum);
-            return sum += t.pret*b
-        });
-        return result
-    }*/
 
     function showCity(){
         const county_id = j.current.value;
@@ -118,16 +90,21 @@ function Order(){
                 county: j.current.value,
                 city: o.current.value,
                 adresa: adress.current.value,
-                cart: cart
+                plata: t.value
             }
             ).then((response) => {
             console.log(response);
         })
-        n.current.value='';
-        p.current.value='';
-        j.current.value='';
-        adress.current.value='';
-
+        function sendRel(){
+            axios.post('http://localhost:8000/api/sendRelationTable', 
+                {
+                    cars_id: cars_id,
+                    quantity: quantity
+                }
+                ).then((response) => {
+                console.log(response);
+            })
+        }
         //setCart([]);
         //window.location.replace("http://localhost:5173/masini");
     }
@@ -193,7 +170,8 @@ function Order(){
                     })
                     }
                     <br/>
-                    <label>Total plata:{totalPay()}</label>
+                    
+                    <label>Total plata:{t= totalPay()}</label>
                     
                 </div>
 
